@@ -20,6 +20,7 @@ def get_conn(args):
 def create_table(cnxn):
     cursor = cnxn.cursor()
     if cursor.tables(table='diag_compression').fetchone():
+        cursor.close()
         return
     else:
         cursor.execute("""
@@ -45,6 +46,7 @@ def create_table(cnxn):
 def create_view(cnxn):
     cursor = cnxn.cursor()
     if cursor.tables(table='diag_projections').fetchone():
+        cursor.close()
         return
     else:
     # query modified from collect_diag_dump.sh  
@@ -121,7 +123,7 @@ def get_tables(cnxn):
 
 def do_sample(table, args):
     # same sampling query and method used by collect_diag_dump.sh
-    # note that "SELECT *" is usually a no-no in Vertica
+    # note that "SELECT *" is usually a performance no-no in Vertica
     q = 'SELECT * FROM {0} WHERE RANDOM() < 0.05 LIMIT 10000000'.format(table)
     outfile = os.path.join(args.tmpdir, 'vsqlout.tmp')
     vsql_args = ['/opt/vertica/bin/vsql', '-At',
