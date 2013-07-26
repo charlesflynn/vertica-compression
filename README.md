@@ -25,7 +25,7 @@ This script uses the same sampling method used by `collect_diag_dump.sh` to esti
       --driver DRIVER  odbc driver (default: HPVertica)
       --host HOST      database host (default: localhost)
       --user USER      database user (default: current user)
-      --tmpdir TMPDIR  tempfile location (default: cwd
+      --tmpdir TMPDIR  tempfile location (default: cwd)
 
 
 ### Requirements
